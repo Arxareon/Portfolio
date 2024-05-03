@@ -10,22 +10,37 @@ body {
 
 /* TEXT BLOCKS */
 
-p {
+p, h1, h2, h3, h4 {
 	color: white;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 24px;
 	margin: 0;
 }
 
-h1 {
-	color: white;
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+p {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+}
+
+h1, h2, h3, h4 {
 	font-variant: small-caps;
-	font-size: 32px;
 	font-weight: 800;
-	margin: 0;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 28px;
+}
+
+h3 {
+	font-size: 24px;
+}
+
+h4 {
+	font-size: 20px;
 }
 
 /* MARGINS */
@@ -89,13 +104,18 @@ h1 {
 	background-size: 220%;
 }
 
+.main-item:hover {
+	box-shadow: 4px 8px 12px #170924;
+	text-shadow: 2px 2px 8px #170924;
+}
+
 #ars {
 	width: calc(var(--circle-size) - 40px);
 	height: calc(var(--circle-size) - 40px);
 	position: absolute;
 	left: calc(50vw - var(--circle-size) / 2 + 20px);
 	top: calc(50vh - var(--circle-size) / 2 + 20px);
-	background-image: url(Sources/20181002_220159-01-cut-small.jpg);
+	background-image: url(Sources/Profile-smol.jpg);
 	background-size: contain;
 	content-visibility: hidden;
 }
@@ -104,15 +124,38 @@ h1 {
 	scale: 1;
 }
 
+#addons {
+	background-size: 220%;
+}
+
 #addons:hover {
 	background-image: url(Sources/WidgetTools-Code.png);
 	background-size: 220%;
 }
 
 #support {
-	background: #c7902d;
+	background-size: 100%;
 }
 
 #support:hover {
-	background: crimson;
+	background: url(Sources/Flow.jpg);
+	background-size: 100%;
+}
+
+#socials {
+	background-size: 100%;
+}
+
+#socials:hover {
+	background: url(Sources/Hoy.jpg);
+	background-size: 100%;
+}
+
+#games {
+	background-size: 100%;
+}
+
+#games:hover {
+	background: url(Sources/Rick-Joy.png);
+	background-size: 100%;
 }
