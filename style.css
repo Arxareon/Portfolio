@@ -75,16 +75,44 @@ h1 {
 	border-radius: 50%;
 	width: var(--circle-size);
 	height: var(--circle-size);
-	transition: scale var(--transition-duration) ease-in-out;
-	/* transition: transform var(--transition-duration) ease-in-out; */
+	transition: all var(--transition-duration) ease-in-out;
 }
 
 .circle:hover {
 	scale: 1.1;
-	/* transform: scale(1.1); */
 }
 
 .main-item {
 	counter-increment: circles;
 	position: absolute;
+	background-image: url(Sources/Orange.png);
+	background-size: 220%;
+}
+
+#ars {
+	width: calc(var(--circle-size) - 40px);
+	height: calc(var(--circle-size) - 40px);
+	position: absolute;
+	left: calc(50vw - var(--circle-size) / 2 + 20px);
+	top: calc(50vh - var(--circle-size) / 2 + 20px);
+	background-image: url(Sources/20181002_220159-01-cut-small.jpg);
+	background-size: contain;
+	content-visibility: hidden;
+}
+
+#ars:hover {
+	scale: 1;
+}
+
+#addons:hover {
+	background-image: url(Sources/WidgetTools-Code.png);
+	background-size: 220%;
+}
+
+#support {
+	background: #c7902d;
+}
+
+#support:hover {
+	background: crimson;
 }
