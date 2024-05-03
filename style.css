@@ -1,56 +1,90 @@
-body {
-    background-color: #2e1048;
+:root {
+	--circle-size: 180px;
+	--transition-duration: .14s;
 }
 
+body {
+	counter-reset: circles;
+	background-color: #2e1048;
+}
+
+/* TEXT BLOCKS */
+
 p {
-    color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    margin: 0;
+	color: white;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	margin: 0;
 }
 
 h1 {
-    color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-variant: small-caps;
-    font-size: 32px;
-    font-weight: 800;
-    margin: 0;
+	color: white;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-variant: small-caps;
+	font-size: 32px;
+	font-weight: 800;
+	margin: 0;
 }
 
+/* MARGINS */
+
 .s-before {
-    margin-top: 8px;
+	margin-top: 8px;
 }
 
 .m-before {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .l-before {
-    margin-top: 60px;
+	margin-top: 60px;
 }
 
 .s-after {
-    margin-bottom: 8px;
+	margin-bottom: 8px;
 }
 
 .m-after {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .l-after {
-    margin-bottom: 60px;
+	margin-bottom: 60px;
+}
+
+/* BLOCKS */
+
+.box, .circle {
+	background-color: #c7902d;
+	text-align: center;
+	overflow: hidden;
+	padding: 30px;
+	box-sizing: border-box;
 }
 
 .box {
-    background-color: #c7902d;
-    border-radius: 40px;
-    padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60cqw;
-    text-align: center;
-    overflow: hidden;
+	border-radius: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60cqw;
+}
+
+.circle {
+	border-radius: 50%;
+	width: var(--circle-size);
+	height: var(--circle-size);
+	transition: scale var(--transition-duration) ease-in-out;
+	/* transition: transform var(--transition-duration) ease-in-out; */
+}
+
+.circle:hover {
+	scale: 1.1;
+	/* transform: scale(1.1); */
+}
+
+.main-item {
+	counter-increment: circles;
+	position: absolute;
 }
