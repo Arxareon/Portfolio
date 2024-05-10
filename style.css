@@ -1,6 +1,8 @@
 :root {
 	--circle-size: 180px;
 	--transition-duration: .14s;
+	--center-left: calc(50vw - var(--circle-size) / 2 + 20px);
+	--center-top: calc(50vh - var(--circle-size) / 2 + 20px);
 }
 
 body {
@@ -90,16 +92,16 @@ h4 {
 	border-radius: 50%;
 	width: var(--circle-size);
 	height: var(--circle-size);
-	transition: all var(--transition-duration) ease-in-out;
-}
-
-.circle:hover {
-	scale: 1.1;
 }
 
 .main-item {
 	counter-increment: circles;
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
+	transition: all var(--transition-duration) ease-in-out;
+	transform-origin: center center;
 	background-image: url(Sources/Orange.png);
 	background-size: 220%;
 }
@@ -110,18 +112,16 @@ h4 {
 }
 
 #ars {
-	width: calc(var(--circle-size) - 40px);
-	height: calc(var(--circle-size) - 40px);
 	position: absolute;
-	left: calc(50vw - var(--circle-size) / 2 + 20px);
-	top: calc(50vh - var(--circle-size) / 2 + 20px);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) translate(0px, 0px) scale(.8);
+	width: var(--circle-size);
+	height: var(--circle-size);
+	transform-origin: center center;
 	background-image: url(Sources/Profile-smol.jpg);
 	background-size: contain;
 	content-visibility: hidden;
-}
-
-#ars:hover {
-	scale: 1;
 }
 
 #addons {

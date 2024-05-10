@@ -1,25 +1,74 @@
 let vw, vh
+const radii = []
+const angles = []
 
-function updateWindowSize() {
-	vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-	vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-}
-
-function positionMenuItems() {
+function initializeMenu() {
 	/** @type {NodeListOf<HTMLDivElement>} */
 	const mainItems = document.querySelectorAll("div.main-item")
 
 	mainItems.forEach((item, index) => {
 		const size = parseFloat(window.getComputedStyle(item).width)
-		const radius = size / 5 + size / 6 * mainItems.length
-		const angle = Math.PI * 2 * (360 / mainItems.length * (index) - 90 + (180 / mainItems.length * (1 - mainItems.length % 2))) / 360
+		radii[index] = size / 5 + size / 6 * mainItems.length
+		angles[index] = Math.PI * 2 * (360 / mainItems.length * (index) - 90 + (180 / mainItems.length * (1 - mainItems.length % 2))) / 360
 
-		updateWindowSize()
+		// Active parameters
+		let isOver = false
+		let isActive = false
+		let x = radii[index] * Math.cos(angles[index])
+		let y = radii[index] * Math.sin(angles[index])
+		let s = 1
 
-		item.style.left = (vw - size) / 2 + radius * Math.cos(angle) + "px"
-		item.style.top = (vh - size) / 2 + radius * Math.sin(angle) + "px"
+		// Init style
+		item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+		// item.style.transition = "all " + window.getComputedStyle(document.documentElement).getPropertyValue('--transition-duration'); + "ease-in-out"
+
+		// Event updates
+		item.addEventListener("mouseover", function() {
+			isOver = true
+			s = isActive ? .9 : 1.1;
+
+			//Update style
+			item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+		})
+		item.addEventListener("mouseout", function() {
+			isOver = false
+			s = isActive ? .8 : 1;
+
+			//Update style
+			item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+		})
+		item.addEventListener("click", function() {
+			if (isActive) {
+				isActive = false
+				x = radii[index] * Math.cos(angles[index])
+				y = radii[index] * Math.sin(angles[index])
+				s = 1
+			} else {
+				isActive = true
+				x = 0
+				y = 0
+				s = .8
+			}
+
+			//Update style
+			item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+		})
+		document.addEventListener('click', function() {
+			if (isOver) { return }
+
+			isActive = false
+			x = radii[index] * Math.cos(angles[index])
+			y = radii[index] * Math.sin(angles[index])
+			s = 1
+
+			//Update style
+			item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+		}, true);
 	})
 }
 
-window.addEventListener('load', positionMenuItems)
-window.addEventListener('resize', positionMenuItems)
+function activateMenuITem() {
+
+}
+
+window.addEventListener('load', initializeMenu)
