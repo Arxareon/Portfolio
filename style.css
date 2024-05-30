@@ -3,10 +3,11 @@
 	--transition-duration: .14s;
 	--center-left: calc(50vw - var(--circle-size) / 2 + 20px);
 	--center-top: calc(50vh - var(--circle-size) / 2 + 20px);
+	--ars-scale: .8;
+	--sub-item-scale: .5;
 }
 
 body {
-	counter-reset: circles;
 	background-color: #2e1048;
 }
 
@@ -94,28 +95,37 @@ h4 {
 	height: var(--circle-size);
 }
 
-.main-item {
-	counter-increment: circles;
+.main-item, .sub-item {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
 	transition: all var(--transition-duration) ease-in-out;
 	transform-origin: center center;
 	background-image: url(Sources/Orange.png);
 	background-size: 220%;
 }
 
-.main-item:hover {
+.main-item {
+	z-index: 1;
+	transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
+}
+
+.sub-item {
+	z-index: -1;
+	transform: translate(-50%, -50%) translate(0px, 0px) scale(var(--sub-item-scale));
+}
+
+.main-item:hover, .sub-item:hover {
 	box-shadow: 4px 8px 12px #170924;
 	text-shadow: 2px 2px 8px #170924;
 }
 
 #ars {
+	z-index: 0;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) translate(0px, 0px) scale(.8);
+	transform: translate(-50%, -50%) translate(0px, 0px) scale(var(--ars-scale));
 	width: var(--circle-size);
 	height: var(--circle-size);
 	transform-origin: center center;
@@ -131,6 +141,26 @@ h4 {
 #addons:hover {
 	background-image: url(Sources/WidgetTools-Code.png);
 	background-size: 220%;
+}
+
+#movementSpeed {
+	background-image: url(Sources/MovementSpeedLogo.png);
+	background-size: 100%;
+}
+
+#remainingXP {
+	background-image: url(Sources/RemainingXPLogo.png);
+	background-size: 100%;
+}
+
+#widgetTools {
+	background-image: url(Sources/WidgetToolsLogo.png);
+	background-size: 100%;
+}
+
+#RPKeyboard {
+	background-image: url(Sources/RPKeyboardLogo.png);
+	background-size: 100%;
 }
 
 #support {

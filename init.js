@@ -5,23 +5,24 @@ const angles = []
 // Custom event types
 const events = { menuItemActivation: "menuItemActivation" }
 
+// CSS variables
+const arsScale = getComputedStyle(document.querySelector(':root')).getPropertyValue('--ars-scale');
+const subItemScale = getComputedStyle(document.querySelector(':root')).getPropertyValue('--sub-item-scale');
+
 function initializeMenu() {
 	/** @type {NodeListOf<HTMLDivElement>} */
 	const mainItems = document.querySelectorAll("div.main-item")
 
 	mainItems.forEach((item, index) => {
-
-		/* STYLE */
-
 		const size = parseFloat(window.getComputedStyle(item).width)
 
-		radius = size / 5 + size / 6 * mainItems.length
+		radius = size / 4.5 + size / 6 * mainItems.length
 		angles[index] = Math.PI * 2 * (360 / mainItems.length * (index) - 90 + (180 / mainItems.length * (1 - mainItems.length % 2))) / 360
 
 		let x = radius * Math.cos(angles[index])
 		let y = radius * Math.sin(angles[index])
 		let s = 1
-
+	
 		// Init style
 		item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
 		// item.style.transition = "all " + window.getComputedStyle(document.documentElement).getPropertyValue('--transition-duration'); + "ease-in-out"
@@ -56,7 +57,7 @@ function initializeMenu() {
 
 		item.addEventListener("mouseout", function() {
 			isOver = false
-			s = isActive ? .8 : 1;
+			s = isActive ? arsScale : 1;
 
 			// Update style
 			item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
@@ -75,7 +76,7 @@ function initializeMenu() {
 				isActive = true
 				x = 0
 				y = 0
-				s = .8
+				s = arsScale
 
 				// Call listeners
 				document.dispatchEvent(menuItemActivated)
@@ -105,9 +106,24 @@ function initializeMenu() {
 window.addEventListener('load', initializeMenu)
 
 document.addEventListener(events.menuItemActivation, (e) => {
-	if (e.detail.active) {
-		console.log(angles[e.detail.index]) // TODO: place child items along the radial line at this angle
-	} else {
-		// TODO: Put child items back to the center out of view
-	}
+	/** @type {NodeListOf<HTMLDivElement>} */
+	const subItems = document.querySelectorAll("div.menu-id_" + e.detail.index)
+
+	subItems.forEach((item, index) => {
+		const size = parseFloat(window.getComputedStyle(item).width)
+
+		let x = 0
+		let y = 0
+		let s = subItemScale
+
+		if (e.detail.active) {
+			let r = size / 6 + size / 8 * angles.length * (index + 1)
+
+			x = r * Math.cos(angles[e.detail.index])
+			y = r * Math.sin(angles[e.detail.index])
+		}
+
+		// Update style
+		item.style.transform = "translate(-50%, -50%) translate(" + x + "px, " + y + "px) scale(" + s + ")"
+	})
 })
